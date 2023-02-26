@@ -21,6 +21,7 @@ class HistoriaFactory extends Factory
         return [
             'titulo'=> $this->faker->word,
             'imagem' => $this->faker->imageUrl(400,400),
+            'sinopse' => $this->faker->text,
             'id_user' => User::pluck('id')->random()
         ];
     }

@@ -34,9 +34,10 @@ class CapituloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Capitulo $capitulo)
+    public function show($id)
     {
-        //
+        $capitulo = Capitulo::find($id);
+        return view('chapter', compact('capitulo'));
     }
 
     /**

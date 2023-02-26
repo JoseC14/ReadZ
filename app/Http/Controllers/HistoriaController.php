@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Historia;
+use App\Models\Capitulo;
 use Illuminate\Http\Request;
 
 class HistoriaController extends Controller
@@ -12,9 +13,9 @@ class HistoriaController extends Controller
      */
     public function index()
     {
-        $historia=  Historia::paginate(6);
+        $historias =  Historia::paginate(6);
 
-        return view('home',compact('historia'));
+        return view('home',compact('historias'));
     }
 
     /**
@@ -36,9 +37,13 @@ class HistoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Historia $historia)
+    public function show($id)
     {
-        //
+        $historia= Historia::find($id);
+
+        $capitulos = Capitulo::where('id_historia',$id)->get();
+
+        return view('show',compact('historia','capitulos'));
     }
 
     /**
