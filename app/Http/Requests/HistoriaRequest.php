@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
-
-class UserRequest extends FormRequest
+use Illuminate\Validation\Rules\File;
+class HistoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user'=>'required',
-            'email'=> ['required','email','unique:App\Models\User,email'],
-            'password'=> ['required','same:samepassword',Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()],
+            'titulo'=>'required',
+            'capa' =>'required|image|mimes:jpeg,jpg,png',
+            'sinopse'=>'required'
         ];
     }
 }

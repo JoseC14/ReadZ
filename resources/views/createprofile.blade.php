@@ -1,35 +1,33 @@
 @extends('index')
-
+@section('entrarativo','active')
 @section('conteudo')
-<div class="container text-center">
+@if ($errors->any())
+<div class="alert">
+    <ul class="list-errors">
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="form form-create">
     <form method="post" action="{{route('site.storeprofile')}}">      
         @csrf  
-        @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-    <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Usuário</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Endereço de e-mail</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Senha</label>
-      <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Confirmar Senha</label>
-        <input type="password" class="form-control" name="samepassword" id="exampleInputPassword1">
-      </div>
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
+   
+    <p>Usuário</p>
+    <input class="form-input" name="user" class="form-input">
+    
+    <p>Endereço de E-mail</p>
+    <input class="form-input" name="email" class="form-input">
+    
+    <p>Senha</p>
+    <input type="password"  name="password" class="form-input">
+ 
+    <p>Confirmar Senha</p>
+    <input type="password" name="samepassword" class="form-input">
+    <p></p>
+    <button type="submit" class="form-btn">Cadastrar</button>
   </form>
 </div>
     

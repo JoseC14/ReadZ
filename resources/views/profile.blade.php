@@ -1,28 +1,21 @@
 @extends('index')
-
+@section('perfilativo','active')
 @section('conteudo')
-<div class="container text-center">
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Usuário</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{auth()->user()->name}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Email</th>
-      </tr>
-      <tr>
-        <td>{{auth()->user()->email}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <form method="get" action="{{route('site.logout')}}">
-    <button type="submit" class="btn btn-danger">Logout</button>
-  </form>
+<div class="profile" >
+  <div class="profile-data">
+    <p>Usuário</p>
+    <p>{{auth()->user()->name}}</p>
+    <p>E-mail</p>
+    <p>{{auth()->user()->email}}</p>
+  </div>
+     <div class="btns">
+      <form method="get" action="{{route('site.logout')}}">
+      <button type="submit" class="btn-logout">Logout</button>
+      </form>
+  
+      <a href="{{route('site.editprofile',auth()->user()->id)}}"> <button  type="submit" class="btn-alterar">Alterar Usuário</button></a>
+    </div>
+ 
 </div> 
     
 @endsection

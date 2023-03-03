@@ -18,6 +18,9 @@ use App\Http\Controllers\UserController;
 
 Route::get('/',[HistoriaController::class,'index'])->name('site.index');
 Route::get('/show/{id}',[HistoriaController::class,'show'])->name('site.show');
+Route::get('/search',[HistoriaController::class,'search'])->name('site.search');
+Route::view('/create','create')->name('site.create');
+Route::post('/store',[HistoriaController::class,'store'])->name('site.store');
 Route::get('/chapters/{id}',[CapituloController::class,'show'])->name('site.chapter');
 Route::get('/login',[UserController::class,'login'])->name('site.login');
 Route::view('/profile', 'profile')->name('site.profile');
@@ -26,3 +29,5 @@ Route::post('/auth',[UserController::class,'auth'])->name('site.auth');
 Route::get('/logout',[UserController::class,'logout'])->name('site.logout');
 Route::view('/profile/create', 'createprofile')->name('site.createprofile');
 Route::post('/profile/store',[UserController::class,'store'])->name('site.storeprofile');
+Route::get('/profile/edit/{id}',[UserController::class,'create'])->name('site.editprofile');
+Route::post('/profile/edit/{id}',[UserController::class,'edit'])->name('site.profiledit');

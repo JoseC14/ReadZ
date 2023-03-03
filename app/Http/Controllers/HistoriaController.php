@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Historia;
 use App\Models\Capitulo;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests\HistoriaRequest;
 
 class HistoriaController extends Controller
 {
@@ -29,9 +31,20 @@ class HistoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HistoriaRequest $request)
     {
-        //
+       $upload = $request->file('capa')->store('/');
+
+       $historia = Historia::create([
+        'titulo'=>$request->titulo,
+        'imagem'=>$upload ,
+        'sinopse'=>$request->sinopse,
+        'id_user'=>auth()->user()->id
+       ]);
+
+       if ($historia){
+         return redirect('/');;
+       }
     }
 
     /**
@@ -45,7 +58,14 @@ class HistoriaController extends Controller
 
         return view('show',compact('historia','capitulos'));
     }
+    
+    public function search( Request $request){
+        $historias = Historia::where([
+            ['titulo','LIKE','%'.$request->historia.'%']
+        ])->paginate(6);
 
+        return view('home', compact('historias'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

@@ -50,4 +50,18 @@ class UserController extends Controller
             return redirect('/login');
          }
     }
+    
+    public function create($id){
+        $user = User::find($id);
+
+        return view('editprofile',compact('user'));
+    }
+
+    public function edit($id,Request $request){
+        $user = User::where('id',$id)->update(['name'=>$request->user]);
+
+        if (isset($user)){
+            return redirect('/profile');
+        }
+    }
 }

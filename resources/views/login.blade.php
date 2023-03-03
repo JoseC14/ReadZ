@@ -1,11 +1,9 @@
 @extends('index')
-
+@section('loginativo', 'active')
 @section('conteudo')
-<div class="container text-center">
-    <form method="post" action="{{route('site.auth')}}">      
-        @csrf  
-        @if ($errors->any())
-    <div class="alert alert-danger">
+
+   @if ($errors->any())
+    <div class="alert">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -14,31 +12,30 @@
     </div>
 @endif
   @if (session('danger'))
-  <div class="alert alert-danger">
+  <div class="alert">
     <ul>
     {{session('danger')}}
     </ul>
   </div>
       
   @endif
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Endereço de e-mail</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+<div class="form-login">
+    <form method="post" action="{{route('site.auth')}}">      
+        @csrf  
+      
+    <div>
+      <p>Endereço de E-mail</p>
+      <input type="email" class="form-input"  name="email">
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Senha</label>
-      <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+    <div>
+      <p>Senha</p>
+      <input type="password" class="form-input" name="password">
     </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
+    <button type="submit" class="form-btn">Entrar</button>
   </form>
 </div>
-<p>
-    
-</p>
-<div class="container text-center">
     <p>
-        <a style="color:black" href="{{route('site.createprofile')}}">Não tem login? Cadastre-se</a>
+        <a  href="{{route('site.createprofile')}}" id="signup">Não tem login? Cadastre-se</a>
     </p>
-</div>
 
 @endsection
